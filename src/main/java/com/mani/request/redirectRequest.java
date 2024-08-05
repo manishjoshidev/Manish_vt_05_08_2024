@@ -1,17 +1,17 @@
 package com.mani.request;
 
-import jakarta.persistence.Column;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.lang.NonNull;
 
 public class redirectRequest {
-@NotNull
-private String alias;
-@NotNull
-
+    @NotNull
+    private String alias;
+    @NotNull
     private String url;
 
-    public redirectRequest(final  String alias,final String url) {
+    public redirectRequest() {
+    }
+
+    public redirectRequest(final String alias, final String url) {
         this.alias = alias;
         this.url = url;
     }
@@ -30,5 +30,13 @@ private String alias;
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "redirectRequest{" +
+                "alias='" + alias + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

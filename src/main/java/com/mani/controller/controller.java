@@ -20,6 +20,8 @@ import java.util.Map;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 public class controller {
@@ -33,7 +35,7 @@ public class controller {
     }
 
     private void loadUrls() {
-        try (CSVReader csvReader = new CSVReader(new FileReader("urls.csv"))) {
+        try (CSVReader csvReader = new CSVReader(new FileReader("C:\\Users\\joshi\\Downloads\\urlShort\\urlShort\\urls.csv"))) {
             String[] values;
             while ((values = csvReader.readNext()) != null) {
                 String shortUrl = values[0];
@@ -41,10 +43,12 @@ public class controller {
                 urlMap.put(shortUrl, fullUrl);
             }
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load URLs from CSV file");
+            // Replace printStackTrace with a proper logging framework
+            Logger.getLogger(controller.class.getName()).log(Level.SEVERE, "Failed to load URLs from CSV file", e);
+            throw new RuntimeException("Failed to load URLs from CSV file", e);
         }
     }
+
 
     @GetMapping("/{alias}")
     public ResponseEntity<?> handleRedirect(@PathVariable String alias) throws URISyntaxException {
